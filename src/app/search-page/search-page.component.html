@@ -1,0 +1,29 @@
+<div class="container">  
+  <div class="logout">
+    <a (click)="logout()">Logout</a>
+  </div>
+  <div class="search-page">
+      <div *ngIf="isDisabled" class="message alert-danger">You have exceeded the maximum limit before one minute is over, please wait a moment</div>
+      <div class="search-bar" >
+            <input type="text" placeholder="Search population by their planet name .." [(ngModel)]="searchValue" (keyup)="onChange()" class="form-control" [disabled]="isDisabled" >
+            <span class="fa fa-search search"></span>
+            <span *ngIf="isSpinner" class="fa fa-spinner fa-spin"></span>
+        </div>
+    </div>
+    <div class="searched-box">
+      <div class="=row">
+        <div *ngFor="let planet of planets | orderBy" class="col-xs-3">
+           <div class="p-grid">
+             <div class="planet" [ngStyle]="{'width': ((planet.population.length * 11) + 'px'), 'height': ((planet.population.length * 11) + 'px'), 'font-size': ((planet.population.length * 2) + 'px')}">
+              {{planet.name}}
+              <!-- <span>{{planet.population}}</span> -->
+           </div>
+           </div>
+        </div>
+        <div *ngIf="planets && planets.length == 0 && !isDisabled" class="no-found">
+                No population found             
+        </div>
+      </div>
+    </div>
+</div>
+<!-- <a [routerLink]="['/login']">click</a> -->
